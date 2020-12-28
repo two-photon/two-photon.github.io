@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>two-photon</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <style>
+      html,
+      body {
+        height: 100vh;
+        margin: 0;
+        font-family: Roboto, Helvetica, sans-serif;
+      }
+      .f-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        height: 20vh;
+      }
+      .title-container {
+        display: flex;
+        background: linear-gradient(0deg, #000000, #111111);
+        align-items: center;
+        height: 80vh;
+      }
+      .f-item {
+        background-color: #111111;
+        color: white;
+        width: calc(100% / 3);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2rem;
+        text-decoration: none;
+      }
+
+      .f-item:hover {
+        background-color: #222222;
+      }
+      .title {
+        width: 100%;
+        text-align: center;
+        font-size: 7rem;
+        color: #ff8c00;
+        background: linear-gradient(90deg, #ff8c00, #ff0080);
+        background-clip: inherit;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    </style>
+    <div class="title-container"><span class="title">two-photon</span></div>
+    <div class="f-container">
+      <a href="booth.html" class="f-item">booth design </a>
+      <div class="f-item"></div>
+      <div class="f-item"></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>FreeCAD model</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r124/three.min.js"
+      integrity="sha512-jeYvJdyAYkpQCY/omvCYQo89qA5YxDW4JBT7COPsHT2sOAanwxkZRFeP9gc69b5reSDpZIoyCqZQZcWZkbB5Gw=="
+      crossorigin="anonymous"
+    ></script>
+    <script src="OrbitControls.js"></script>
+    <script>
+      var camera, controls, scene, renderer;
+
+      window.onload = function () {
+        var SCREEN_WIDTH = window.innerWidth,
+          SCREEN_HEIGHT = window.innerHeight;
+        var VIEW_ANGLE = 35,
+          ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT,
+          NEAR = 0.1,
+          FAR = 20000;
+
+        renderer = new THREE.WebGLRenderer();
+        renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+        document.body.appendChild(renderer.domElement);
+
+        scene = new THREE.Scene();
+        const axes = new THREE.AxesHelper(250);
+        scene.add(axes);
+
+        camera = new THREE.PerspectiveCamera(
+          VIEW_ANGLE, // Field of view
+          ASPECT, // Aspect ratio
+          NEAR, // Near plane
+          FAR // Far plane
+        );
+        //camera.position.set( 161.31712341308594, 42.821815490722656, 1.0 );
+        camera.position.set(0, -1000, 0);
+        camera.lookAt(scene.position);
+        // placeholder for the FreeCAD camera
+
+        controls = new THREE.OrbitControls(camera,renderer.domElement);
+        // controls = new THREE.TrackballControls(camera);
+        // controls.rotateSpeed = 1.0;
+        // controls.zoomSpeed = 1.2;
+        // controls.panSpeed = 0.8;
+        // controls.noZoom = false;
+        // controls.noPan = false;
+        // controls.staticMoving = true;
+        // controls.dynamicDampingFactor = 0.3;
+        // controls.keys = [65, 83, 68];
+
+        var geom = new THREE.Geometry();
+        var v0 = new THREE.Vector3(0.0, 90.0, -70.0);
+        var v1 = new THREE.Vector3(0.0, 0.0, 0.0);
+        var v2 = new THREE.Vector3(0.0, 90.0, 0.0);
+        var v3 = new THREE.Vector3(0.0, 0.0, -70.0);
+        var v4 = new THREE.Vector3(120.0, 0.0, 0.0);
+        var v5 = new THREE.Vector3(120.0, 90.0, -70.0);
+        var v6 = new THREE.Vector3(120.0, 90.0, 0.0);
+        var v7 = new THREE.Vector3(120.0, 0.0, -70.0);
+        console.log(geom.vertices);
+        geom.vertices.push(v0);
+        geom.vertices.push(v1);
+        geom.vertices.push(v2);
+        geom.vertices.push(v3);
+        geom.vertices.push(v4);
+        geom.vertices.push(v5);
+        geom.vertices.push(v6);
+        geom.vertices.push(v7);
+        geom.faces.push(new THREE.Face3(0, 1, 2));
+        geom.faces.push(new THREE.Face3(3, 1, 0));
+        geom.faces.push(new THREE.Face3(4, 5, 6));
+        geom.faces.push(new THREE.Face3(4, 7, 5));
+        geom.faces.push(new THREE.Face3(7, 4, 3));
+        geom.faces.push(new THREE.Face3(3, 4, 1));
+        geom.faces.push(new THREE.Face3(6, 5, 0));
+        geom.faces.push(new THREE.Face3(6, 0, 2));
+        geom.faces.push(new THREE.Face3(0, 5, 3));
+        geom.faces.push(new THREE.Face3(3, 5, 7));
+        geom.faces.push(new THREE.Face3(6, 2, 1));
+        geom.faces.push(new THREE.Face3(6, 1, 4));
+        var basematerial = new THREE.MeshBasicMaterial({ color: 0xa52a2a });
+        var mesh = new THREE.Mesh(geom, basematerial);
+        scene.add(mesh);
+        var linematerial = new THREE.LineBasicMaterial({
+          linewidth: 1,
+          color: 0x000000,
+        });
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(0.0, 90.0, 0.0));
+        wire.vertices.push(new THREE.Vector3(0.0, 90.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(0.0, 0.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(0.0, 0.0, 0.0));
+        wire.vertices.push(new THREE.Vector3(0.0, 89.9999999999992, 0.0));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(120.0, 90.0, 0.0));
+        wire.vertices.push(new THREE.Vector3(120.0, 90.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(120.0, 0.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(120.0, 0.0, 0.0));
+        wire.vertices.push(new THREE.Vector3(120.0, 89.9999999999992, 0.0));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(120.0, 0.0, 0.0));
+        wire.vertices.push(new THREE.Vector3(0.0, 0.0, 0.0));
+        wire.vertices.push(new THREE.Vector3(0.0, 0.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(120.0, 0.0, -70.0));
+        wire.vertices.push(
+          new THREE.Vector3(120.0, 0.0, -6.252776074688882e-13)
+        );
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(120.0, 90.0, 0.0));
+        wire.vertices.push(new THREE.Vector3(0.0, 90.0, 0.0));
+        wire.vertices.push(new THREE.Vector3(0.0, 90.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(120.0, 90.0, -70.0));
+        wire.vertices.push(
+          new THREE.Vector3(120.0, 90.0, -6.252776074688882e-13)
+        );
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(120.0, 90.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(120.0, 0.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(0.0, 0.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(0.0, 90.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(119.99999999999893, 90.0, -70.0));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(120.0, 90.0, 0.0));
+        wire.vertices.push(new THREE.Vector3(120.0, 0.0, 0.0));
+        wire.vertices.push(new THREE.Vector3(0.0, 0.0, 0.0));
+        wire.vertices.push(new THREE.Vector3(0.0, 90.0, 0.0));
+        wire.vertices.push(new THREE.Vector3(119.99999999999893, 90.0, 0.0));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var geom = new THREE.Geometry();
+        var v0 = new THREE.Vector3(-60.0, 110.0, -70.0);
+        var v1 = new THREE.Vector3(-60.0, 90.0, 130.0);
+        var v2 = new THREE.Vector3(-60.0, 110.0, 130.0);
+        var v3 = new THREE.Vector3(-60.0, 90.0, -70.0);
+        var v4 = new THREE.Vector3(120.0, 90.0, 130.0);
+        var v5 = new THREE.Vector3(120.0, 110.0, -70.0);
+        var v6 = new THREE.Vector3(120.0, 110.0, 130.0);
+        var v7 = new THREE.Vector3(120.0, 90.0, -70.0);
+        console.log(geom.vertices);
+        geom.vertices.push(v0);
+        geom.vertices.push(v1);
+        geom.vertices.push(v2);
+        geom.vertices.push(v3);
+        geom.vertices.push(v4);
+        geom.vertices.push(v5);
+        geom.vertices.push(v6);
+        geom.vertices.push(v7);
+        geom.faces.push(new THREE.Face3(0, 1, 2));
+        geom.faces.push(new THREE.Face3(3, 1, 0));
+        geom.faces.push(new THREE.Face3(4, 5, 6));
+        geom.faces.push(new THREE.Face3(4, 7, 5));
+        geom.faces.push(new THREE.Face3(7, 4, 3));
+        geom.faces.push(new THREE.Face3(3, 4, 1));
+        geom.faces.push(new THREE.Face3(6, 5, 0));
+        geom.faces.push(new THREE.Face3(6, 0, 2));
+        geom.faces.push(new THREE.Face3(0, 5, 3));
+        geom.faces.push(new THREE.Face3(3, 5, 7));
+        geom.faces.push(new THREE.Face3(6, 2, 1));
+        geom.faces.push(new THREE.Face3(6, 1, 4));
+        var basematerial = new THREE.MeshBasicMaterial({ color: 0x666666 });
+        var mesh = new THREE.Mesh(geom, basematerial);
+        scene.add(mesh);
+        var linematerial = new THREE.LineBasicMaterial({
+          linewidth: 1,
+          color: 0x000000,
+        });
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(-60.0, 110.0, 130.0));
+        wire.vertices.push(new THREE.Vector3(-60.0, 110.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(-60.0, 90.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(-60.0, 90.0, 130.0));
+        wire.vertices.push(new THREE.Vector3(-60.0, 109.99999999999983, 130.0));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(120.0, 110.0, 130.0));
+        wire.vertices.push(new THREE.Vector3(120.0, 110.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(120.0, 90.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(120.0, 90.0, 130.0));
+        wire.vertices.push(new THREE.Vector3(120.0, 109.99999999999983, 130.0));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(120.0, 90.0, 130.0));
+        wire.vertices.push(new THREE.Vector3(-60.0, 90.0, 130.0));
+        wire.vertices.push(new THREE.Vector3(-60.0, 90.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(120.0, 90.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(120.0, 90.0, 129.99999999999824));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(120.0, 110.0, 130.0));
+        wire.vertices.push(new THREE.Vector3(-60.0, 110.0, 130.0));
+        wire.vertices.push(new THREE.Vector3(-60.0, 110.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(120.0, 110.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(120.0, 110.0, 129.99999999999824));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(120.0, 110.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(120.0, 90.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(-60.0, 90.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(-60.0, 110.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(119.99999999999841, 110.0, -70.0));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(120.0, 110.0, 130.0));
+        wire.vertices.push(new THREE.Vector3(120.0, 90.0, 130.0));
+        wire.vertices.push(new THREE.Vector3(-60.0, 90.0, 130.0));
+        wire.vertices.push(new THREE.Vector3(-60.0, 110.0, 130.0));
+        wire.vertices.push(new THREE.Vector3(119.99999999999841, 110.0, 130.0));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var geom = new THREE.Geometry();
+        var v0 = new THREE.Vector3(10.5, 64.5, 0.0);
+        var v1 = new THREE.Vector3(10.5, 8.5, 100.0);
+        var v2 = new THREE.Vector3(10.5, 64.5, 100.0);
+        var v3 = new THREE.Vector3(10.5, 8.5, 0.0);
+        var v4 = new THREE.Vector3(86.5, 8.5, 100.0);
+        var v5 = new THREE.Vector3(86.5, 64.5, 0.0);
+        var v6 = new THREE.Vector3(86.5, 64.5, 100.0);
+        var v7 = new THREE.Vector3(86.5, 8.5, 0.0);
+        console.log(geom.vertices);
+        geom.vertices.push(v0);
+        geom.vertices.push(v1);
+        geom.vertices.push(v2);
+        geom.vertices.push(v3);
+        geom.vertices.push(v4);
+        geom.vertices.push(v5);
+        geom.vertices.push(v6);
+        geom.vertices.push(v7);
+        geom.faces.push(new THREE.Face3(0, 1, 2));
+        geom.faces.push(new THREE.Face3(3, 1, 0));
+        geom.faces.push(new THREE.Face3(4, 5, 6));
+        geom.faces.push(new THREE.Face3(4, 7, 5));
+        geom.faces.push(new THREE.Face3(7, 4, 3));
+        geom.faces.push(new THREE.Face3(3, 4, 1));
+        geom.faces.push(new THREE.Face3(6, 5, 0));
+        geom.faces.push(new THREE.Face3(6, 0, 2));
+        geom.faces.push(new THREE.Face3(0, 5, 3));
+        geom.faces.push(new THREE.Face3(3, 5, 7));
+        geom.faces.push(new THREE.Face3(6, 2, 1));
+        geom.faces.push(new THREE.Face3(6, 1, 4));
+        var basematerial = new THREE.MeshBasicMaterial({ color: 0x000000 });
+        var mesh = new THREE.Mesh(geom, basematerial);
+        scene.add(mesh);
+        var linematerial = new THREE.LineBasicMaterial({
+          linewidth: 1,
+          color: 0x000000,
+        });
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(10.5, 64.5, 100.0));
+        wire.vertices.push(new THREE.Vector3(10.5, 64.5, 0.0));
+        wire.vertices.push(new THREE.Vector3(10.5, 8.5, 0.0));
+        wire.vertices.push(new THREE.Vector3(10.5, 8.5, 100.0));
+        wire.vertices.push(new THREE.Vector3(10.5, 64.4999999999995, 100.0));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(86.5, 64.5, 100.0));
+        wire.vertices.push(new THREE.Vector3(86.5, 64.5, 0.0));
+        wire.vertices.push(new THREE.Vector3(86.5, 8.5, 0.0));
+        wire.vertices.push(new THREE.Vector3(86.5, 8.5, 100.0));
+        wire.vertices.push(new THREE.Vector3(86.5, 64.4999999999995, 100.0));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(86.5, 8.5, 100.0));
+        wire.vertices.push(new THREE.Vector3(10.5, 8.5, 100.0));
+        wire.vertices.push(new THREE.Vector3(10.5, 8.5, 0.0));
+        wire.vertices.push(new THREE.Vector3(86.5, 8.5, 0.0));
+        wire.vertices.push(new THREE.Vector3(86.5, 8.5, 99.99999999999912));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(86.5, 64.5, 100.0));
+        wire.vertices.push(new THREE.Vector3(10.5, 64.5, 100.0));
+        wire.vertices.push(new THREE.Vector3(10.5, 64.5, 0.0));
+        wire.vertices.push(new THREE.Vector3(86.5, 64.5, 0.0));
+        wire.vertices.push(new THREE.Vector3(86.5, 64.5, 99.99999999999912));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(86.5, 64.5, 0.0));
+        wire.vertices.push(new THREE.Vector3(86.5, 8.5, 0.0));
+        wire.vertices.push(new THREE.Vector3(10.5, 8.5, 0.0));
+        wire.vertices.push(new THREE.Vector3(10.5, 64.5, 0.0));
+        wire.vertices.push(new THREE.Vector3(86.49999999999932, 64.5, 0.0));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(86.5, 64.5, 100.0));
+        wire.vertices.push(new THREE.Vector3(86.5, 8.5, 100.0));
+        wire.vertices.push(new THREE.Vector3(10.5, 8.5, 100.0));
+        wire.vertices.push(new THREE.Vector3(10.5, 64.5, 100.0));
+        wire.vertices.push(new THREE.Vector3(86.49999999999932, 64.5, 100.0));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var geom = new THREE.Geometry();
+        var v0 = new THREE.Vector3(-110.0, 110.0, -80.0);
+        var v1 = new THREE.Vector3(-110.0, -70.0, -70.0);
+        var v2 = new THREE.Vector3(-110.0, 110.0, -70.0);
+        var v3 = new THREE.Vector3(-110.0, -70.0, -80.0);
+        var v4 = new THREE.Vector3(170.0, -70.0, -70.0);
+        var v5 = new THREE.Vector3(170.0, 110.0, -80.0);
+        var v6 = new THREE.Vector3(170.0, 110.0, -70.0);
+        var v7 = new THREE.Vector3(170.0, -70.0, -80.0);
+        console.log(geom.vertices);
+        geom.vertices.push(v0);
+        geom.vertices.push(v1);
+        geom.vertices.push(v2);
+        geom.vertices.push(v3);
+        geom.vertices.push(v4);
+        geom.vertices.push(v5);
+        geom.vertices.push(v6);
+        geom.vertices.push(v7);
+        geom.faces.push(new THREE.Face3(0, 1, 2));
+        geom.faces.push(new THREE.Face3(3, 1, 0));
+        geom.faces.push(new THREE.Face3(4, 5, 6));
+        geom.faces.push(new THREE.Face3(4, 7, 5));
+        geom.faces.push(new THREE.Face3(3, 7, 1));
+        geom.faces.push(new THREE.Face3(7, 4, 1));
+        geom.faces.push(new THREE.Face3(5, 0, 2));
+        geom.faces.push(new THREE.Face3(6, 5, 2));
+        geom.faces.push(new THREE.Face3(0, 5, 3));
+        geom.faces.push(new THREE.Face3(3, 5, 7));
+        geom.faces.push(new THREE.Face3(6, 2, 1));
+        geom.faces.push(new THREE.Face3(6, 1, 4));
+        var basematerial = new THREE.MeshBasicMaterial({ color: 0x000000 });
+        var mesh = new THREE.Mesh(geom, basematerial);
+        scene.add(mesh);
+        var linematerial = new THREE.LineBasicMaterial({
+          linewidth: 1,
+          color: 0x000000,
+        });
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(-110.0, 110.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(-110.0, 110.0, -80.0));
+        wire.vertices.push(new THREE.Vector3(-110.0, -70.0, -80.0));
+        wire.vertices.push(new THREE.Vector3(-110.0, -70.0, -70.0));
+        wire.vertices.push(
+          new THREE.Vector3(-110.0, 109.99999999999841, -70.0)
+        );
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(170.0, 110.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(170.0, 110.0, -80.0));
+        wire.vertices.push(new THREE.Vector3(170.0, -70.0, -80.0));
+        wire.vertices.push(new THREE.Vector3(170.0, -70.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(170.0, 109.99999999999841, -70.0));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(170.0, -70.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(-110.0, -70.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(-110.0, -70.0, -80.0));
+        wire.vertices.push(new THREE.Vector3(170.0, -70.0, -80.0));
+        wire.vertices.push(new THREE.Vector3(170.0, -70.0, -70.00000000000009));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(170.0, 110.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(-110.0, 110.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(-110.0, 110.0, -80.0));
+        wire.vertices.push(new THREE.Vector3(170.0, 110.0, -80.0));
+        wire.vertices.push(new THREE.Vector3(170.0, 110.0, -70.00000000000009));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(170.0, 110.0, -80.0));
+        wire.vertices.push(new THREE.Vector3(170.0, -70.0, -80.0));
+        wire.vertices.push(new THREE.Vector3(-110.0, -70.0, -80.0));
+        wire.vertices.push(new THREE.Vector3(-110.0, 110.0, -80.0));
+        wire.vertices.push(new THREE.Vector3(169.9999999999975, 110.0, -80.0));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(170.0, 110.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(170.0, -70.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(-110.0, -70.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(-110.0, 110.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(169.9999999999975, 110.0, -70.0));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var geom = new THREE.Geometry();
+        var v0 = new THREE.Vector3(-110.0, 110.0, -70.0);
+        var v1 = new THREE.Vector3(-110.0, -70.0, 130.0);
+        var v2 = new THREE.Vector3(-110.0, 110.0, 130.0);
+        var v3 = new THREE.Vector3(-110.0, -70.0, -70.0);
+        var v4 = new THREE.Vector3(-60.0, -70.0, 130.0);
+        var v5 = new THREE.Vector3(-60.0, 110.0, -70.0);
+        var v6 = new THREE.Vector3(-60.0, 110.0, 130.0);
+        var v7 = new THREE.Vector3(-60.0, -70.0, -70.0);
+        console.log(geom.vertices);
+        geom.vertices.push(v0);
+        geom.vertices.push(v1);
+        geom.vertices.push(v2);
+        geom.vertices.push(v3);
+        geom.vertices.push(v4);
+        geom.vertices.push(v5);
+        geom.vertices.push(v6);
+        geom.vertices.push(v7);
+        geom.faces.push(new THREE.Face3(0, 1, 2));
+        geom.faces.push(new THREE.Face3(3, 1, 0));
+        geom.faces.push(new THREE.Face3(4, 5, 6));
+        geom.faces.push(new THREE.Face3(4, 7, 5));
+        geom.faces.push(new THREE.Face3(7, 4, 3));
+        geom.faces.push(new THREE.Face3(3, 4, 1));
+        geom.faces.push(new THREE.Face3(6, 5, 0));
+        geom.faces.push(new THREE.Face3(6, 0, 2));
+        geom.faces.push(new THREE.Face3(0, 5, 3));
+        geom.faces.push(new THREE.Face3(3, 5, 7));
+        geom.faces.push(new THREE.Face3(6, 2, 1));
+        geom.faces.push(new THREE.Face3(6, 1, 4));
+        var basematerial = new THREE.MeshBasicMaterial({ color: 0x008000 });
+        var mesh = new THREE.Mesh(geom, basematerial);
+        scene.add(mesh);
+        var linematerial = new THREE.LineBasicMaterial({
+          linewidth: 1,
+          color: 0x000000,
+        });
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(-110.0, 110.0, 130.0));
+        wire.vertices.push(new THREE.Vector3(-110.0, 110.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(-110.0, -70.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(-110.0, -70.0, 130.0));
+        wire.vertices.push(
+          new THREE.Vector3(-110.0, 109.99999999999841, 130.0)
+        );
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(-60.0, 110.0, 130.0));
+        wire.vertices.push(new THREE.Vector3(-60.0, 110.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(-60.0, -70.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(-60.0, -70.0, 130.0));
+        wire.vertices.push(new THREE.Vector3(-60.0, 109.99999999999841, 130.0));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(-60.0, -70.0, 130.0));
+        wire.vertices.push(new THREE.Vector3(-110.0, -70.0, 130.0));
+        wire.vertices.push(new THREE.Vector3(-110.0, -70.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(-60.0, -70.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(-60.0, -70.0, 129.99999999999824));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(-60.0, 110.0, 130.0));
+        wire.vertices.push(new THREE.Vector3(-110.0, 110.0, 130.0));
+        wire.vertices.push(new THREE.Vector3(-110.0, 110.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(-60.0, 110.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(-60.0, 110.0, 129.99999999999824));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(-60.0, 110.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(-60.0, -70.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(-110.0, -70.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(-110.0, 110.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(-60.00000000000044, 110.0, -70.0));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(-60.0, 110.0, 130.0));
+        wire.vertices.push(new THREE.Vector3(-60.0, -70.0, 130.0));
+        wire.vertices.push(new THREE.Vector3(-110.0, -70.0, 130.0));
+        wire.vertices.push(new THREE.Vector3(-110.0, 110.0, 130.0));
+        wire.vertices.push(new THREE.Vector3(-60.00000000000044, 110.0, 130.0));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var geom = new THREE.Geometry();
+        var v0 = new THREE.Vector3(115.0, -10.0, -70.0);
+        var v1 = new THREE.Vector3(115.0, 100.0, 130.0);
+        var v2 = new THREE.Vector3(115.0, 100.0, -70.0);
+        var v3 = new THREE.Vector3(115.0, -10.0, 130.0);
+        var v4 = new THREE.Vector3(165.0, 100.0, 130.0);
+        var v5 = new THREE.Vector3(165.0, -10.0, -70.0);
+        var v6 = new THREE.Vector3(165.0, 100.0, -70.0);
+        var v7 = new THREE.Vector3(165.0, -10.0, 130.0);
+        console.log(geom.vertices);
+        geom.vertices.push(v0);
+        geom.vertices.push(v1);
+        geom.vertices.push(v2);
+        geom.vertices.push(v3);
+        geom.vertices.push(v4);
+        geom.vertices.push(v5);
+        geom.vertices.push(v6);
+        geom.vertices.push(v7);
+        geom.faces.push(new THREE.Face3(0, 1, 2));
+        geom.faces.push(new THREE.Face3(0, 3, 1));
+        geom.faces.push(new THREE.Face3(4, 5, 6));
+        geom.faces.push(new THREE.Face3(7, 5, 4));
+        geom.faces.push(new THREE.Face3(5, 7, 0));
+        geom.faces.push(new THREE.Face3(0, 7, 3));
+        geom.faces.push(new THREE.Face3(4, 6, 2));
+        geom.faces.push(new THREE.Face3(4, 2, 1));
+        geom.faces.push(new THREE.Face3(2, 6, 0));
+        geom.faces.push(new THREE.Face3(0, 6, 5));
+        geom.faces.push(new THREE.Face3(4, 1, 3));
+        geom.faces.push(new THREE.Face3(4, 3, 7));
+        var basematerial = new THREE.MeshBasicMaterial({ color: 0x808080 });
+        var mesh = new THREE.Mesh(geom, basematerial);
+        scene.add(mesh);
+        var linematerial = new THREE.LineBasicMaterial({
+          linewidth: 1,
+          color: 0x000000,
+        });
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(115.0, 100.0, 130.0));
+        wire.vertices.push(new THREE.Vector3(115.0, 100.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(115.0, -10.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(115.0, -10.0, 130.0));
+        wire.vertices.push(new THREE.Vector3(115.0, 99.99999999999902, 130.0));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(165.0, 100.0, 130.0));
+        wire.vertices.push(new THREE.Vector3(165.0, 100.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(165.0, -10.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(165.0, -10.0, 130.0));
+        wire.vertices.push(new THREE.Vector3(165.0, 99.99999999999902, 130.0));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(165.0, -10.0, 130.0));
+        wire.vertices.push(new THREE.Vector3(115.0, -10.0, 130.0));
+        wire.vertices.push(new THREE.Vector3(115.0, -10.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(165.0, -10.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(165.0, -10.0, 129.99999999999824));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(165.0, 100.0, 130.0));
+        wire.vertices.push(new THREE.Vector3(115.0, 100.0, 130.0));
+        wire.vertices.push(new THREE.Vector3(115.0, 100.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(165.0, 100.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(165.0, 100.0, 129.99999999999824));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(165.0, 100.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(165.0, -10.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(115.0, -10.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(115.0, 100.0, -70.0));
+        wire.vertices.push(new THREE.Vector3(164.99999999999955, 100.0, -70.0));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(165.0, 100.0, 130.0));
+        wire.vertices.push(new THREE.Vector3(165.0, -10.0, 130.0));
+        wire.vertices.push(new THREE.Vector3(115.0, -10.0, 130.0));
+        wire.vertices.push(new THREE.Vector3(115.0, 100.0, 130.0));
+        wire.vertices.push(new THREE.Vector3(164.99999999999955, 100.0, 130.0));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var geom = new THREE.Geometry();
+        var v0 = new THREE.Vector3(72.0, 89.0, 0.0);
+        var v1 = new THREE.Vector3(72.0, 68.0, 8.5);
+        var v2 = new THREE.Vector3(72.0, 89.0, 8.5);
+        var v3 = new THREE.Vector3(72.0, 68.0, 0.0);
+        var v4 = new THREE.Vector3(81.99387050653768, 68.0, 0.9040322682126891);
+        var v5 = new THREE.Vector3(81.6329785036578, 68.0, 1.2237546835184119);
+        var v6 = new THREE.Vector3(81.35908794869357, 68.0, 1.6205536559124654);
+        var v7 = new THREE.Vector3(82.42079022591491, 68.0, 0.6799675146291717);
+        var v8 = new THREE.Vector3(81.18811636514789, 68.0, 2.071368671424887);
+        var v9 = new THREE.Vector3(81.13, 68.0, 2.550000000000002);
+        var v10 = new THREE.Vector3(
+          81.18811636514789,
+          68.0,
+          3.0286313285751167
+        );
+        var v11 = new THREE.Vector3(81.35908794869357, 68.0, 3.479446344087538);
+        var v12 = new THREE.Vector3(81.6329785036578, 68.0, 3.876245316481591);
+        var v13 = new THREE.Vector3(
+          82.88892663948934,
+          68.0,
+          0.5645822518038923
+        );
+        var v14 = new THREE.Vector3(86.0, 68.0, 0.0);
+        var v15 = new THREE.Vector3(
+          83.37107336051064,
+          68.0,
+          0.5645822518038912
+        );
+        var v16 = new THREE.Vector3(
+          83.83920977408506,
+          68.0,
+          0.6799675146291682
+        );
+        var v17 = new THREE.Vector3(84.2661294934623, 68.0, 0.9040322682126838);
+        var v18 = new THREE.Vector3(84.6270214963422, 68.0, 1.2237546835184048);
+        var v19 = new THREE.Vector3(81.99387050653769, 68.0, 4.195967731787313);
+        var v20 = new THREE.Vector3(84.9009120513064, 68.0, 1.620553655912457);
+        var v21 = new THREE.Vector3(82.42079022591493, 68.0, 4.42003248537083);
+        var v22 = new THREE.Vector3(85.0718836348521, 68.0, 2.071368671424877);
+        var v23 = new THREE.Vector3(85.13, 68.0, 2.5499999999999994);
+        var v24 = new THREE.Vector3(85.0718836348521, 68.0, 3.0286313285751154);
+        var v25 = new THREE.Vector3(86.0, 68.0, 8.5);
+        var v26 = new THREE.Vector3(84.90091205130642, 68.0, 3.479446344087537);
+        var v27 = new THREE.Vector3(84.6270214963422, 68.0, 3.87624531648159);
+        var v28 = new THREE.Vector3(84.2661294934623, 68.0, 4.195967731787313);
+        var v29 = new THREE.Vector3(83.83920977408506, 68.0, 4.420032485370829);
+        var v30 = new THREE.Vector3(
+          83.37107336051064,
+          68.0,
+          4.5354177481961075
+        );
+        var v31 = new THREE.Vector3(
+          82.88892663948936,
+          68.0,
+          4.5354177481961075
+        );
+        var v32 = new THREE.Vector3(86.0, 89.0, 8.5);
+        var v33 = new THREE.Vector3(86.0, 89.0, 0.0);
+        var v34 = new THREE.Vector3(
+          82.42079022591491,
+          66.0,
+          0.6799675146291722
+        );
+        var v35 = new THREE.Vector3(
+          81.99387050653768,
+          66.0,
+          0.9040322682126896
+        );
+        var v36 = new THREE.Vector3(
+          82.88892663948934,
+          66.0,
+          0.5645822518038928
+        );
+        var v37 = new THREE.Vector3(85.0718836348521, 66.0, 3.028631328575116);
+        var v38 = new THREE.Vector3(
+          83.37107336051064,
+          66.0,
+          0.5645822518038917
+        );
+        var v39 = new THREE.Vector3(85.13, 66.0, 2.55);
+        var v40 = new THREE.Vector3(
+          84.90091205130642,
+          66.0,
+          3.4794463440875374
+        );
+        var v41 = new THREE.Vector3(
+          83.83920977408506,
+          66.0,
+          0.6799675146291686
+        );
+        var v42 = new THREE.Vector3(84.6270214963422, 66.0, 3.87624531648159);
+        var v43 = new THREE.Vector3(84.2661294934623, 66.0, 0.9040322682126842);
+        var v44 = new THREE.Vector3(84.2661294934623, 66.0, 4.195967731787313);
+        var v45 = new THREE.Vector3(84.6270214963422, 66.0, 1.2237546835184052);
+        var v46 = new THREE.Vector3(83.83920977408506, 66.0, 4.420032485370831);
+        var v47 = new THREE.Vector3(84.9009120513064, 66.0, 1.6205536559124574);
+        var v48 = new THREE.Vector3(85.0718836348521, 66.0, 2.071368671424878);
+        var v49 = new THREE.Vector3(83.37107336051064, 66.0, 4.535417748196108);
+        var v50 = new THREE.Vector3(82.88892663948936, 66.0, 4.535417748196108);
+        var v51 = new THREE.Vector3(82.42079022591493, 66.0, 4.420032485370831);
+        var v52 = new THREE.Vector3(81.99387050653769, 66.0, 4.195967731787313);
+        var v53 = new THREE.Vector3(81.6329785036578, 66.0, 3.876245316481591);
+        var v54 = new THREE.Vector3(
+          81.35908794869357,
+          66.0,
+          3.4794463440875383
+        );
+        var v55 = new THREE.Vector3(81.18811636514789, 66.0, 3.028631328575117);
+        var v56 = new THREE.Vector3(81.13, 66.0, 2.5500000000000025);
+        var v57 = new THREE.Vector3(81.18811636514789, 66.0, 2.071368671424887);
+        var v58 = new THREE.Vector3(
+          81.35908794869357,
+          66.0,
+          1.6205536559124658
+        );
+        var v59 = new THREE.Vector3(81.6329785036578, 66.0, 1.2237546835184123);
+        console.log(geom.vertices);
+        geom.vertices.push(v0);
+        geom.vertices.push(v1);
+        geom.vertices.push(v2);
+        geom.vertices.push(v3);
+        geom.vertices.push(v4);
+        geom.vertices.push(v5);
+        geom.vertices.push(v6);
+        geom.vertices.push(v7);
+        geom.vertices.push(v8);
+        geom.vertices.push(v9);
+        geom.vertices.push(v10);
+        geom.vertices.push(v11);
+        geom.vertices.push(v12);
+        geom.vertices.push(v13);
+        geom.vertices.push(v14);
+        geom.vertices.push(v15);
+        geom.vertices.push(v16);
+        geom.vertices.push(v17);
+        geom.vertices.push(v18);
+        geom.vertices.push(v19);
+        geom.vertices.push(v20);
+        geom.vertices.push(v21);
+        geom.vertices.push(v22);
+        geom.vertices.push(v23);
+        geom.vertices.push(v24);
+        geom.vertices.push(v25);
+        geom.vertices.push(v26);
+        geom.vertices.push(v27);
+        geom.vertices.push(v28);
+        geom.vertices.push(v29);
+        geom.vertices.push(v30);
+        geom.vertices.push(v31);
+        geom.vertices.push(v32);
+        geom.vertices.push(v33);
+        geom.vertices.push(v34);
+        geom.vertices.push(v35);
+        geom.vertices.push(v36);
+        geom.vertices.push(v37);
+        geom.vertices.push(v38);
+        geom.vertices.push(v39);
+        geom.vertices.push(v40);
+        geom.vertices.push(v41);
+        geom.vertices.push(v42);
+        geom.vertices.push(v43);
+        geom.vertices.push(v44);
+        geom.vertices.push(v45);
+        geom.vertices.push(v46);
+        geom.vertices.push(v47);
+        geom.vertices.push(v48);
+        geom.vertices.push(v49);
+        geom.vertices.push(v50);
+        geom.vertices.push(v51);
+        geom.vertices.push(v52);
+        geom.vertices.push(v53);
+        geom.vertices.push(v54);
+        geom.vertices.push(v55);
+        geom.vertices.push(v56);
+        geom.vertices.push(v57);
+        geom.vertices.push(v58);
+        geom.vertices.push(v59);
+        geom.faces.push(new THREE.Face3(0, 1, 2));
+        geom.faces.push(new THREE.Face3(3, 1, 0));
+        geom.faces.push(new THREE.Face3(3, 4, 5));
+        geom.faces.push(new THREE.Face3(5, 6, 3));
+        geom.faces.push(new THREE.Face3(3, 7, 4));
+        geom.faces.push(new THREE.Face3(6, 8, 3));
+        geom.faces.push(new THREE.Face3(8, 9, 3));
+        geom.faces.push(new THREE.Face3(3, 10, 1));
+        geom.faces.push(new THREE.Face3(9, 10, 3));
+        geom.faces.push(new THREE.Face3(10, 11, 1));
+        geom.faces.push(new THREE.Face3(11, 12, 1));
+        geom.faces.push(new THREE.Face3(13, 14, 15));
+        geom.faces.push(new THREE.Face3(15, 14, 16));
+        geom.faces.push(new THREE.Face3(16, 14, 17));
+        geom.faces.push(new THREE.Face3(17, 14, 18));
+        geom.faces.push(new THREE.Face3(12, 19, 1));
+        geom.faces.push(new THREE.Face3(14, 20, 18));
+        geom.faces.push(new THREE.Face3(19, 21, 1));
+        geom.faces.push(new THREE.Face3(14, 22, 20));
+        geom.faces.push(new THREE.Face3(14, 23, 22));
+        geom.faces.push(new THREE.Face3(24, 25, 26));
+        geom.faces.push(new THREE.Face3(26, 25, 27));
+        geom.faces.push(new THREE.Face3(27, 25, 28));
+        geom.faces.push(new THREE.Face3(28, 25, 29));
+        geom.faces.push(new THREE.Face3(29, 25, 30));
+        geom.faces.push(new THREE.Face3(30, 25, 31));
+        geom.faces.push(new THREE.Face3(31, 25, 21));
+        geom.faces.push(new THREE.Face3(21, 25, 1));
+        geom.faces.push(new THREE.Face3(3, 14, 13));
+        geom.faces.push(new THREE.Face3(3, 13, 7));
+        geom.faces.push(new THREE.Face3(14, 25, 23));
+        geom.faces.push(new THREE.Face3(23, 25, 24));
+        geom.faces.push(new THREE.Face3(32, 2, 1));
+        geom.faces.push(new THREE.Face3(32, 1, 25));
+        geom.faces.push(new THREE.Face3(33, 0, 2));
+        geom.faces.push(new THREE.Face3(32, 33, 2));
+        geom.faces.push(new THREE.Face3(0, 33, 3));
+        geom.faces.push(new THREE.Face3(3, 33, 14));
+        geom.faces.push(new THREE.Face3(25, 33, 32));
+        geom.faces.push(new THREE.Face3(25, 14, 33));
+        geom.faces.push(new THREE.Face3(34, 35, 4));
+        geom.faces.push(new THREE.Face3(34, 4, 7));
+        geom.faces.push(new THREE.Face3(36, 34, 7));
+        geom.faces.push(new THREE.Face3(36, 7, 13));
+        geom.faces.push(new THREE.Face3(37, 23, 24));
+        geom.faces.push(new THREE.Face3(38, 36, 13));
+        geom.faces.push(new THREE.Face3(37, 39, 23));
+        geom.faces.push(new THREE.Face3(38, 13, 15));
+        geom.faces.push(new THREE.Face3(40, 24, 26));
+        geom.faces.push(new THREE.Face3(41, 38, 15));
+        geom.faces.push(new THREE.Face3(40, 37, 24));
+        geom.faces.push(new THREE.Face3(41, 15, 16));
+        geom.faces.push(new THREE.Face3(42, 26, 27));
+        geom.faces.push(new THREE.Face3(43, 41, 16));
+        geom.faces.push(new THREE.Face3(43, 16, 17));
+        geom.faces.push(new THREE.Face3(42, 40, 26));
+        geom.faces.push(new THREE.Face3(44, 27, 28));
+        geom.faces.push(new THREE.Face3(45, 43, 17));
+        geom.faces.push(new THREE.Face3(45, 17, 18));
+        geom.faces.push(new THREE.Face3(44, 42, 27));
+        geom.faces.push(new THREE.Face3(46, 28, 29));
+        geom.faces.push(new THREE.Face3(47, 18, 20));
+        geom.faces.push(new THREE.Face3(46, 44, 28));
+        geom.faces.push(new THREE.Face3(47, 45, 18));
+        geom.faces.push(new THREE.Face3(48, 20, 22));
+        geom.faces.push(new THREE.Face3(49, 29, 30));
+        geom.faces.push(new THREE.Face3(48, 47, 20));
+        geom.faces.push(new THREE.Face3(39, 22, 23));
+        geom.faces.push(new THREE.Face3(49, 46, 29));
+        geom.faces.push(new THREE.Face3(39, 48, 22));
+        geom.faces.push(new THREE.Face3(50, 30, 31));
+        geom.faces.push(new THREE.Face3(50, 49, 30));
+        geom.faces.push(new THREE.Face3(51, 31, 21));
+        geom.faces.push(new THREE.Face3(51, 50, 31));
+        geom.faces.push(new THREE.Face3(52, 21, 19));
+        geom.faces.push(new THREE.Face3(52, 51, 21));
+        geom.faces.push(new THREE.Face3(53, 19, 12));
+        geom.faces.push(new THREE.Face3(53, 52, 19));
+        geom.faces.push(new THREE.Face3(54, 12, 11));
+        geom.faces.push(new THREE.Face3(54, 53, 12));
+        geom.faces.push(new THREE.Face3(55, 54, 11));
+        geom.faces.push(new THREE.Face3(55, 11, 10));
+        geom.faces.push(new THREE.Face3(56, 55, 10));
+        geom.faces.push(new THREE.Face3(56, 10, 9));
+        geom.faces.push(new THREE.Face3(57, 56, 9));
+        geom.faces.push(new THREE.Face3(57, 9, 8));
+        geom.faces.push(new THREE.Face3(58, 57, 8));
+        geom.faces.push(new THREE.Face3(58, 8, 6));
+        geom.faces.push(new THREE.Face3(59, 58, 6));
+        geom.faces.push(new THREE.Face3(59, 6, 5));
+        geom.faces.push(new THREE.Face3(35, 59, 5));
+        geom.faces.push(new THREE.Face3(35, 5, 4));
+        geom.faces.push(new THREE.Face3(54, 55, 56));
+        geom.faces.push(new THREE.Face3(54, 56, 57));
+        geom.faces.push(new THREE.Face3(54, 57, 58));
+        geom.faces.push(new THREE.Face3(45, 59, 35));
+        geom.faces.push(new THREE.Face3(45, 35, 34));
+        geom.faces.push(new THREE.Face3(45, 34, 36));
+        geom.faces.push(new THREE.Face3(45, 36, 38));
+        geom.faces.push(new THREE.Face3(45, 38, 41));
+        geom.faces.push(new THREE.Face3(45, 41, 43));
+        geom.faces.push(new THREE.Face3(48, 45, 47));
+        geom.faces.push(new THREE.Face3(50, 51, 52));
+        geom.faces.push(new THREE.Face3(50, 52, 53));
+        geom.faces.push(new THREE.Face3(50, 53, 54));
+        geom.faces.push(new THREE.Face3(40, 39, 37));
+        geom.faces.push(new THREE.Face3(40, 58, 59));
+        geom.faces.push(new THREE.Face3(40, 48, 39));
+        geom.faces.push(new THREE.Face3(40, 59, 45));
+        geom.faces.push(new THREE.Face3(40, 45, 48));
+        geom.faces.push(new THREE.Face3(42, 44, 46));
+        geom.faces.push(new THREE.Face3(42, 46, 49));
+        geom.faces.push(new THREE.Face3(42, 49, 50));
+        geom.faces.push(new THREE.Face3(42, 54, 58));
+        geom.faces.push(new THREE.Face3(42, 50, 54));
+        geom.faces.push(new THREE.Face3(42, 58, 40));
+        var basematerial = new THREE.MeshBasicMaterial({ color: 0xcccccc });
+        var mesh = new THREE.Mesh(geom, basematerial);
+        scene.add(mesh);
+        var linematerial = new THREE.LineBasicMaterial({
+          linewidth: 1,
+          color: 0x000000,
+        });
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(72.0, 89.0, 8.5));
+        wire.vertices.push(new THREE.Vector3(72.0, 89.0, 0.0));
+        wire.vertices.push(new THREE.Vector3(72.0, 68.0, 0.0));
+        wire.vertices.push(new THREE.Vector3(72.0, 68.0, 8.5));
+        wire.vertices.push(new THREE.Vector3(72.0, 88.99999999999982, 8.5));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(86.0, 68.0, 0.0));
+        wire.vertices.push(new THREE.Vector3(86.0, 68.0, 8.5));
+        wire.vertices.push(new THREE.Vector3(72.0, 68.0, 8.5));
+        wire.vertices.push(new THREE.Vector3(72.0, 68.0, 0.0));
+        wire.vertices.push(new THREE.Vector3(85.99999999999987, 68.0, 0.0));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(85.13, 68.0, 2.5499999999999994));
+        wire.vertices.push(
+          new THREE.Vector3(84.97775906502257, 68.0, 1.784633135269819)
+        );
+        wire.vertices.push(
+          new THREE.Vector3(84.54421356237309, 68.0, 1.1357864376269045)
+        );
+        wire.vertices.push(
+          new THREE.Vector3(83.89536686473018, 68.0, 0.7022409349774266)
+        );
+        wire.vertices.push(new THREE.Vector3(83.13, 68.0, 0.5499999999999998));
+        wire.vertices.push(
+          new THREE.Vector3(82.36463313526981, 68.0, 0.7022409349774268)
+        );
+        wire.vertices.push(
+          new THREE.Vector3(81.7157864376269, 68.0, 1.135786437626905)
+        );
+        wire.vertices.push(
+          new THREE.Vector3(81.28224093497742, 68.0, 1.7846331352698206)
+        );
+        wire.vertices.push(new THREE.Vector3(81.13, 68.0, 2.5500000000000003));
+        wire.vertices.push(
+          new THREE.Vector3(81.28224093497742, 68.0, 3.3153668647301795)
+        );
+        wire.vertices.push(
+          new THREE.Vector3(81.7157864376269, 68.0, 3.9642135623730947)
+        );
+        wire.vertices.push(
+          new THREE.Vector3(82.36463313526981, 68.0, 4.397759065022573)
+        );
+        wire.vertices.push(new THREE.Vector3(83.13, 68.0, 4.55));
+        wire.vertices.push(
+          new THREE.Vector3(83.89536686473018, 68.0, 4.397759065022573)
+        );
+        wire.vertices.push(
+          new THREE.Vector3(84.54421356237309, 68.0, 3.9642135623730947)
+        );
+        wire.vertices.push(
+          new THREE.Vector3(84.97775906502257, 68.0, 3.31536686473018)
+        );
+        wire.vertices.push(new THREE.Vector3(85.13, 68.0, 2.5500000000000282));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(86.0, 89.0, 8.5));
+        wire.vertices.push(new THREE.Vector3(86.0, 68.0, 8.5));
+        wire.vertices.push(new THREE.Vector3(72.0, 68.0, 8.5));
+        wire.vertices.push(new THREE.Vector3(72.0, 89.0, 8.5));
+        wire.vertices.push(new THREE.Vector3(85.99999999999987, 89.0, 8.5));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(86.0, 89.0, 8.5));
+        wire.vertices.push(new THREE.Vector3(72.0, 89.0, 8.5));
+        wire.vertices.push(new THREE.Vector3(72.0, 89.0, 0.0));
+        wire.vertices.push(new THREE.Vector3(86.0, 89.0, 0.0));
+        wire.vertices.push(new THREE.Vector3(86.0, 89.0, 8.499999999999925));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(86.0, 89.0, 0.0));
+        wire.vertices.push(new THREE.Vector3(86.0, 68.0, 0.0));
+        wire.vertices.push(new THREE.Vector3(72.0, 68.0, 0.0));
+        wire.vertices.push(new THREE.Vector3(72.0, 89.0, 0.0));
+        wire.vertices.push(new THREE.Vector3(85.99999999999987, 89.0, 0.0));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(86.0, 89.0, 8.5));
+        wire.vertices.push(new THREE.Vector3(86.0, 89.0, 0.0));
+        wire.vertices.push(new THREE.Vector3(86.0, 68.0, 0.0));
+        wire.vertices.push(new THREE.Vector3(86.0, 68.0, 8.5));
+        wire.vertices.push(new THREE.Vector3(86.0, 88.99999999999982, 8.5));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(85.13, 68.0, 2.5499999999999994));
+        wire.vertices.push(new THREE.Vector3(85.13, 66.0, 2.55));
+        wire.vertices.push(
+          new THREE.Vector3(84.97775906502257, 66.0, 1.7846331352698195)
+        );
+        wire.vertices.push(
+          new THREE.Vector3(84.54421356237309, 66.0, 1.135786437626905)
+        );
+        wire.vertices.push(
+          new THREE.Vector3(83.89536686473018, 66.0, 0.702240934977427)
+        );
+        wire.vertices.push(new THREE.Vector3(83.13, 66.0, 0.5500000000000003));
+        wire.vertices.push(
+          new THREE.Vector3(82.36463313526981, 66.0, 0.7022409349774272)
+        );
+        wire.vertices.push(
+          new THREE.Vector3(81.7157864376269, 66.0, 1.1357864376269053)
+        );
+        wire.vertices.push(
+          new THREE.Vector3(81.28224093497742, 66.0, 1.784633135269821)
+        );
+        wire.vertices.push(new THREE.Vector3(81.13, 66.0, 2.5500000000000007));
+        wire.vertices.push(
+          new THREE.Vector3(81.28224093497742, 66.0, 3.31536686473018)
+        );
+        wire.vertices.push(
+          new THREE.Vector3(81.7157864376269, 66.0, 3.9642135623730956)
+        );
+        wire.vertices.push(
+          new THREE.Vector3(82.36463313526981, 66.0, 4.397759065022574)
+        );
+        wire.vertices.push(new THREE.Vector3(83.13, 66.0, 4.550000000000001));
+        wire.vertices.push(
+          new THREE.Vector3(83.89536686473018, 66.0, 4.397759065022573)
+        );
+        wire.vertices.push(
+          new THREE.Vector3(84.54421356237309, 66.0, 3.964213562373095)
+        );
+        wire.vertices.push(
+          new THREE.Vector3(84.97775906502257, 66.0, 3.315366864730181)
+        );
+        wire.vertices.push(new THREE.Vector3(85.13, 66.0, 2.5500000000000553));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        var wire = new THREE.Geometry();
+        wire.vertices.push(new THREE.Vector3(85.13, 66.0, 2.5500000000000003));
+        wire.vertices.push(
+          new THREE.Vector3(84.97775906502257, 66.0, 3.31536686473018)
+        );
+        wire.vertices.push(
+          new THREE.Vector3(84.54421356237309, 66.0, 3.964213562373095)
+        );
+        wire.vertices.push(
+          new THREE.Vector3(83.89536686473018, 66.0, 4.397759065022574)
+        );
+        wire.vertices.push(new THREE.Vector3(83.13, 66.0, 4.550000000000001));
+        wire.vertices.push(
+          new THREE.Vector3(82.36463313526981, 66.0, 4.397759065022574)
+        );
+        wire.vertices.push(
+          new THREE.Vector3(81.7157864376269, 66.0, 3.9642135623730956)
+        );
+        wire.vertices.push(
+          new THREE.Vector3(81.28224093497742, 66.0, 3.31536686473018)
+        );
+        wire.vertices.push(new THREE.Vector3(81.13, 66.0, 2.5500000000000007));
+        wire.vertices.push(
+          new THREE.Vector3(81.28224093497742, 66.0, 1.784633135269821)
+        );
+        wire.vertices.push(
+          new THREE.Vector3(81.7157864376269, 66.0, 1.1357864376269053)
+        );
+        wire.vertices.push(
+          new THREE.Vector3(82.36463313526981, 66.0, 0.7022409349774272)
+        );
+        wire.vertices.push(new THREE.Vector3(83.13, 66.0, 0.5500000000000003));
+        wire.vertices.push(
+          new THREE.Vector3(83.89536686473018, 66.0, 0.702240934977427)
+        );
+        wire.vertices.push(
+          new THREE.Vector3(84.54421356237309, 66.0, 1.135786437626905)
+        );
+        wire.vertices.push(
+          new THREE.Vector3(84.97775906502257, 66.0, 1.7846331352698195)
+        );
+        wire.vertices.push(new THREE.Vector3(85.13, 66.0, 2.5499999999999714));
+        var line = new THREE.Line(wire, linematerial);
+        scene.add(line);
+        // placeholder for the FreeCAD objects
+
+        var light = new THREE.PointLight(0xffff00);
+        light.position.set(-10000, -10000, 10000);
+        scene.add(light);
+
+        renderer.render(scene, camera);
+
+        animate();
+      };
+
+      function animate() {
+        requestAnimationFrame(animate);
+        render();
+      }
+
+      function render() {
+        <!-- controls.update(); -->
+        renderer.render(scene, camera);
+      }
+    </script>
+  </head>
+<style>
+body{
+  margin:0;
+}
+  <body></body>
+</html>
